@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JSSubDog.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JSDog : NSObject
 
 @property(nonatomic, copy, readonly, nonnull)NSString *breed;
-@property(nonatomic, copy, readonly, nullable)NSArray *subBreed;
+@property(nonatomic, copy, readonly, nullable)NSArray<JSSubDog *> *subBreed;
 @property(nonatomic, copy, readonly, nullable)NSString *image;
 
 -(instancetype)initWithBreed:(NSString *)breed

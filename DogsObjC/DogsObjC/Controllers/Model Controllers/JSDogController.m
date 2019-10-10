@@ -38,7 +38,7 @@ static NSString * const kImageRandomString = @"images/random";
     [[[NSURLSession sharedSession] dataTaskWithURL:finalURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error)
         {
-            NSLog(@"Error fetching post: %@", error);
+            NSLog(@"Error fetching dog: %@", error);
         }
         
         if (response)
@@ -70,18 +70,16 @@ static NSString * const kImageRandomString = @"images/random";
                 JSDog *breed = [[JSDog alloc] initWithBreed:key subBreed:subBreeds image:[NSString new]];
                 [arrayOfBreeds addObject:breed];
             }
+            JSDogController.sharedController.dogs = arrayOfBreeds;
             completion(true);
         }
         
     }]resume];
 }
 
-- (void)fetchImage:(JSDog *)name completion:(void (^)(UIImage * _Nullable))completion
+- (void)fetchImage:(NSString *)urlString completion:(void (^)(UIImage * _Nullable))completion
 {
-    NSURL *imageURL = [NSURL URLWithString:kBaseURLString];
-    NSURL *breedURL = [imageURL URLByAppendingPathComponent:kBreedImageComponentString];
-    NSURL *breedNameURL = [breedURL URLByAppendingPathComponent:name.breed];
-    NSURL *finalURL = [breedNameURL URLByAppendingPathComponent:kImageRandomString];
+    NSURL *finalURL = [NSURL URLWithString:urlString];
     
     [[[NSURLSession sharedSession] dataTaskWithURL:finalURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error)
@@ -107,13 +105,10 @@ static NSString * const kImageRandomString = @"images/random";
     }] resume];
 }
 
-- (void)fetchImageSubDog:(JSSubDog *)subDog completion:(void (^)(UIImage * _Nullable))completion
+
+- (void)fetchImageSubDog:(NSString *)urlString completion:(void (^)(UIImage * _Nullable))completion
 {
-    NSURL *imageURL = [NSURL URLWithString:kBaseURLString];
-    NSURL *breedURL = [imageURL URLByAppendingPathComponent:kBreedImageComponentString];
-    NSURL *breedNameURL = [breedURL URLByAppendingPathComponent:subDog.name];
-    NSURL *finalURL = [breedNameURL URLByAppendingPathComponent:kImageRandomString];
-    
+    NSURL *finalURL = [NSURL URLWithString:urlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:finalURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error)
         {
@@ -136,5 +131,72 @@ static NSString * const kImageRandomString = @"images/random";
         UIImage *image = [UIImage imageWithData:data];
         completion(image);
     }] resume];
+}
+
+// When you fetchImage, it brings you to a page with more data. This data contains a dictionary with key = "message" and value = the image URL. This is because when you use the randomize URL, it provides a new picture URL. The fetchImageURL function parses though this data. 
+- (void)fetchImageURL:(JSDog *)dog completion:(void (^)(NSString * _Nullable))completion
+{
+    NSURL *imageURL = [NSURL URLWithString:kBaseURLString];
+    NSURL *breedURL = [imageURL URLByAppendingPathComponent:kBreedImageComponentString];
+    NSURL *breedNameURL = [breedURL URLByAppendingPathComponent:dog.breed];
+    NSURL *finalURL = [breedNameURL URLByAppendingPathComponent:kImageRandomString];
+    
+    [[[NSURLSession sharedSession] dataTaskWithURL:finalURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error)
+        {
+            NSLog(@"Error fetching image: %@", error);
+            completion(nil);
+            return;
+        }
+        if (response)
+        {
+            NSLog(@"%@", response);
+        }
+        
+        if (!data)
+        {
+            NSLog(@"Error with image data");
+            completion(nil);
+            return;
+        }
+        
+        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:2 error:&error];
+        NSString *urlString = dictionary[@"message"];
+        completion(urlString);
+        
+    }]resume];
+}
+
+- (void)fetchSubDogImageURL:(JSSubDog *)dog breedName:(NSString *)breedName completion:(void (^)(NSString * _Nullable))completion
+{
+    NSURL *imageURL = [NSURL URLWithString:kBaseURLString];
+    NSURL *breedURL = [imageURL URLByAppendingPathComponent:kBreedImageComponentString];
+    NSURL *breedNameURL = [breedURL URLByAppendingPathComponent:breedName];
+    NSURL *subBreedNameURL = [breedNameURL URLByAppendingPathComponent:dog.name];
+    NSURL *finalURL = [subBreedNameURL URLByAppendingPathComponent:kImageRandomString];
+    
+    [[[NSURLSession sharedSession] dataTaskWithURL:finalURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error)
+        {
+            NSLog(@"Error fetching image: %@", error);
+            completion(nil);
+            return;
+        }
+        if (response)
+        {
+            NSLog(@"%@", response);
+        }
+        
+        if (!data)
+        {
+            NSLog(@"Error with image data");
+            completion(nil);
+            return;
+        }
+        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:2 error:&error];
+        NSString *urlString = dictionary[@"message"];
+        completion(urlString);
+        
+    }]resume];
 }
 @end

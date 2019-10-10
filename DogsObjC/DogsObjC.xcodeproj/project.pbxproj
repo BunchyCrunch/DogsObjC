@@ -16,6 +16,9 @@
 		FC2B484A234E711C00FC5A62 /* JSDog.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2B4849234E711C00FC5A62 /* JSDog.m */; };
 		FC2B4850234E83BB00FC5A62 /* JSDogController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2B484F234E83BB00FC5A62 /* JSDogController.m */; };
 		FC2B4853234E948900FC5A62 /* JSSubDog.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2B4852234E948900FC5A62 /* JSSubDog.m */; };
+		FC2EAD37234F9F34009C32EC /* JSDogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2EAD36234F9F34009C32EC /* JSDogTableViewController.swift */; };
+		FC2EAD39234F9F51009C32EC /* JSDogDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2EAD38234F9F51009C32EC /* JSDogDetailViewController.swift */; };
+		FC2EAD3B234FA606009C32EC /* JSSubDogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2EAD3A234FA606009C32EC /* JSSubDogTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +38,10 @@
 		FC2B484F234E83BB00FC5A62 /* JSDogController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSDogController.m; sourceTree = "<group>"; };
 		FC2B4851234E948900FC5A62 /* JSSubDog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSSubDog.h; sourceTree = "<group>"; };
 		FC2B4852234E948900FC5A62 /* JSSubDog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSSubDog.m; sourceTree = "<group>"; };
+		FC2EAD35234F9F33009C32EC /* DogsObjC-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DogsObjC-Bridging-Header.h"; sourceTree = "<group>"; };
+		FC2EAD36234F9F34009C32EC /* JSDogTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSDogTableViewController.swift; sourceTree = "<group>"; };
+		FC2EAD38234F9F51009C32EC /* JSDogDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSDogDetailViewController.swift; sourceTree = "<group>"; };
+		FC2EAD3A234FA606009C32EC /* JSSubDogTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSSubDogTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,10 +119,30 @@
 		FC2B484D234E713300FC5A62 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FC2EAD34234F9F18009C32EC /* View Controllers */,
+				FC2EAD33234F9EF7009C32EC /* Model Controllers */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FC2EAD33234F9EF7009C32EC /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
 				FC2B484E234E83BB00FC5A62 /* JSDogController.h */,
 				FC2B484F234E83BB00FC5A62 /* JSDogController.m */,
 			);
-			path = Controllers;
+			path = "Model Controllers";
+			sourceTree = "<group>";
+		};
+		FC2EAD34234F9F18009C32EC /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FC2EAD36234F9F34009C32EC /* JSDogTableViewController.swift */,
+				FC2EAD35234F9F33009C32EC /* DogsObjC-Bridging-Header.h */,
+				FC2EAD38234F9F51009C32EC /* JSDogDetailViewController.swift */,
+				FC2EAD3A234FA606009C32EC /* JSSubDogTableViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,6 +177,7 @@
 				TargetAttributes = {
 					FC2B482A234E6F3B00FC5A62 = {
 						CreatedOnToolsVersion = 11.1;
+						LastSwiftMigration = 1110;
 					};
 				};
 			};
@@ -191,7 +219,10 @@
 			files = (
 				FC2B4830234E6F3B00FC5A62 /* AppDelegate.m in Sources */,
 				FC2B4841234E6F3D00FC5A62 /* main.m in Sources */,
+				FC2EAD37234F9F34009C32EC /* JSDogTableViewController.swift in Sources */,
+				FC2EAD39234F9F51009C32EC /* JSDogDetailViewController.swift in Sources */,
 				FC2B4853234E948900FC5A62 /* JSSubDog.m in Sources */,
+				FC2EAD3B234FA606009C32EC /* JSSubDogTableViewController.swift in Sources */,
 				FC2B4833234E6F3B00FC5A62 /* SceneDelegate.m in Sources */,
 				FC2B484A234E711C00FC5A62 /* JSDog.m in Sources */,
 				FC2B4850234E83BB00FC5A62 /* JSDogController.m in Sources */,
@@ -334,6 +365,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LNY44KHWJJ;
 				INFOPLIST_FILE = "$(SRCROOT)/DogsObjC/Resources/Info.plist";
@@ -343,6 +375,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.DogsObjC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DogsObjC/Controllers/View Controllers/DogsObjC-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -351,6 +386,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LNY44KHWJJ;
 				INFOPLIST_FILE = "$(SRCROOT)/DogsObjC/Resources/Info.plist";
@@ -360,6 +396,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.DogsObjC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DogsObjC/Controllers/View Controllers/DogsObjC-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

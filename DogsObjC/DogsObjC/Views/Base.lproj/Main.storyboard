@@ -7,16 +7,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--Dog Table View Controller-->
         <scene sceneID="HKf-9S-KeC">
             <objects>
-                <tableViewController id="EDa-R8-ChY" sceneMemberID="viewController">
+                <tableViewController id="EDa-R8-ChY" customClass="JSDogTableViewController" customModule="DogsObjC" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="gpB-r7-4al">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="OG6-AG-HfZ" style="IBUITableViewCellStyleDefault" id="4zR-kR-aya">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dogCell" textLabel="OG6-AG-HfZ" style="IBUITableViewCellStyleDefault" id="4zR-kR-aya">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4zR-kR-aya" id="kRT-S8-nVs">
@@ -32,9 +32,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="8dR-2y-3Xx" kind="show" id="hdy-Qp-lkd"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -43,15 +40,60 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="d3r-Ap-OQD"/>
+                    <connections>
+                        <segue destination="MCH-nZ-vlo" kind="show" identifier="toSubDog" id="EaL-c2-clb"/>
+                        <segue destination="8dR-2y-3Xx" kind="show" identifier="toImage" id="Zs1-LJ-vUc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K9l-J8-Frk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="986.95652173913049" y="151.33928571428569"/>
+            <point key="canvasLocation" x="980" y="153"/>
         </scene>
-        <!--View Controller-->
+        <!--Sub Dog Table View Controller-->
+        <scene sceneID="EQd-jn-pej">
+            <objects>
+                <tableViewController id="MCH-nZ-vlo" customClass="JSSubDogTableViewController" customModule="DogsObjC" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="PK6-SH-ttK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="subDogCell" textLabel="qks-EX-bP8" style="IBUITableViewCellStyleDefault" id="OGr-Ue-RUL">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OGr-Ue-RUL" id="Zog-u1-1SW">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qks-EX-bP8">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="8dR-2y-3Xx" kind="show" identifier="subBreedToImage" id="rAF-rl-OGw"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="MCH-nZ-vlo" id="Pxg-nz-KhQ"/>
+                            <outlet property="delegate" destination="MCH-nZ-vlo" id="MVR-yh-eeW"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="2du-G5-YLe"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zzD-WT-6MU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1814" y="-22"/>
+        </scene>
+        <!--Dog Detail View Controller-->
         <scene sceneID="xJc-5u-ga2">
             <objects>
-                <viewController id="8dR-2y-3Xx" sceneMemberID="viewController">
+                <viewController id="8dR-2y-3Xx" customClass="JSDogDetailViewController" customModule="DogsObjC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3wV-8P-666">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,10 +114,13 @@
                         <viewLayoutGuide key="safeArea" id="NU1-oj-W5a"/>
                     </view>
                     <navigationItem key="navigationItem" id="R2W-eA-yK7"/>
+                    <connections>
+                        <outlet property="dogImageView" destination="cu5-xS-i57" id="f3I-FO-5YF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P0l-iM-5Zx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1704" y="153"/>
+            <point key="canvasLocation" x="1813" y="731"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GdT-vG-dLe">
@@ -96,4 +141,7 @@
             <point key="canvasLocation" x="76.811594202898561" y="151.33928571428569"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="rAF-rl-OGw"/>
+    </inferredMetricsTieBreakers>
 </document>
